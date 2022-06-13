@@ -19,18 +19,7 @@ icon_list <- c(
 )
 
 ui <- fluidPage(
-  tags$script("
-    Shiny.addCustomMessageHandler('clean_event', function(value) {
-    Shiny.setInputValue('event_type', null);
-    Shiny.setInputValue('sub_event_type', null);
-    });
-  "),
-  tags$script("
-    Shiny.addCustomMessageHandler('clean_map', function(value) {
-    Shiny.setInputValue('map_draw_new_feature', null);
-    });
-  "),
-  titlePanel("Eventos ocurridos desde el inicio de la Guerra de Ucrania"),
+  titlePanel("Eventos ocurridos en el conflicto de Ucrania - Rusia"),
   sidebarLayout(
     sidebarPanel(
       pickerInput(inputId = "event_type",
@@ -48,15 +37,14 @@ ui <- fluidPage(
                      label = "Fecha",
                      start = '2022-02-17',
                      end = Sys.Date()
+      ),
+      downloadButton("downloadCSV",
+                      label = "Descargar datos",
+                      style = "pill", 
+                      color = "danger"
       )
     ), #div(DT::dataTableOutput("paises"))
     mainPanel(leafletOutput(outputId = "map", height = "500px", width="100%"), 
-              actionBttn(
-                inputId = "remove_map_filtering",
-                label = "Borrar filtrado mapa",
-                style = "pill", 
-                color = "danger"
-              ),
               DTOutput("outtable"),
               plotlyOutput("summaryplot"),
               plotlyOutput("timeseriesplot"),

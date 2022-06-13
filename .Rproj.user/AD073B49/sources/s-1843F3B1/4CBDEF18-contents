@@ -22,12 +22,12 @@ if (!require('dygraphs')) install.packages('dygraphs'); library(dygraphs)
 if (!require('shinyWidgets')) install.packages('shinyWidgets'); library(shinyWidgets)
 #if (!require('leafem')) install.packages('leafem'); library(leafem)
 if (!require('sf')) install.packages('sf'); library(sf)
-if (!require('terra')) install.packages('terra', repos='https://rspatial.r-universe.dev'); library(terra)
+#if (!require('terra')) install.packages('terra', repos='https://rspatial.r-universe.dev'); library(terra)
 
 # Deployment
 if (!require('rsconnect')) install.packages('rsconnect'); library(rsconnect)
 
-#Sys.setlocale("LC_TIME", "en_GB.UTF-8")
+Sys.setlocale("LC_TIME", "en_GB.UTF-8")
 
 ## Acceso de ACLED
 raw_data <-

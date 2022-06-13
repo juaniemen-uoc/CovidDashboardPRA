@@ -10,21 +10,6 @@ server <- function(input, output, session) {
              crs =st_crs("EPSG:4326"))
   })
   
-  # paleta para el temático, basado en los varloes de casos totales (total_casos)
-  #paleta <-
-  #  reactive({
-  #    colorQuantile("Reds", unique(paises_total_casos()@data[,"total"]), n = 9)
-  #  })
-  
-  #Renderizado de la tabla "paises"
-  #output$paises = DT::renderDataTable({
-  #  DT::datatable(paises_tabla(), selection = "single")
-  #})
-
-  # Ej 3 Función que captura los cambios en los radiobutton
-  observeEvent(input$variable_to_show, {
-    variable(input$variable_to_show)
-  })
   
   set_popup_content <- function(country, admin1, location, notes){
     paste(sep = "<br/>",
@@ -62,8 +47,8 @@ server <- function(input, output, session) {
   })
   output$outtable <- renderDT(
     as.data.frame(filtered()) %>% mutate(location_comp=paste(country, admin1, location, sep=" / ")) %>% 
-      select(event_id_cnty, event_date_real, event_type, sub_event_type, location_comp) %>% 
-      rename("id"=event_id_cnty , "Date"=event_date_real , "Event type" = event_type, "Subevent type"=sub_event_type, "Location"=location_comp)
+      select(event_id_cnty, event_date_real, event_type, sub_event_type, location_comp, actor1, actor2) %>% 
+      rename("id"=event_id_cnty , "Date"=event_date_real , "Event type" = event_type, "Subevent type"=sub_event_type, "Location"=location_comp, "Actor 1"=actor1, "Actor 2"=actor2)
   )
   
   output$summaryplot <- renderPlotly({
@@ -72,7 +57,7 @@ server <- function(input, output, session) {
   })
 
   output$timeseriesplot <- renderPlotly({
-    ggplot(filtered(), aes(colour=event_type, x=event_date_real)) + 
+    ggplot(filtered() %>% rename("Tipo.evento"=event_type, "Fecha"=event_date_real), aes(colour=Tipo.evento, x=Fecha)) + 
       geom_line(stat="count") + labs(x = "Fecha", y="Conteo", colour="Evento") + scale_color_manual(values=event_type_color(levels(factor(filtered()$event_type))))
   })
   
@@ -88,17 +73,10 @@ server <- function(input, output, session) {
             showlegend = FALSE)
   })
   
-  # Función que captura el código ISO - iso_code - cuando se selecciona un registro en la tabla.
-  selectedRow <- eventReactive(input$paises_rows_selected, {
-    as.character(paises_tabla()[c(input$paises_rows_selected)]$iso_code[1])
-  })
-  
-  observeEvent(input$remove_event_filtering, {
-    session$sendCustomMessage("clean_event", 'null')
-  })
-  
-  observeEvent(input$remove_map_filtering, {
-    session$sendCustomMessage("clean_map", 'null')
-  })
-
+  output$downloadCSV <- downloadHandler(
+    filename = function(){paste("eventos_rusia_ucrania_", format(Sys.time(), "%s"), '.csv', sep = '')},
+    content = function(file) {
+      write.csv(filtered(), file)
+    }
+  )
 }

@@ -3,7 +3,7 @@
     "path": "~/UOC/2 - Visualización de Datos/PRA2/ShinyAppPRA1/server.R",
     "project_path": "server.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "138464119",
     "contents": "",
     "dirty": false,
     "created": 1654679677277.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "13,12",
-        "scrollLine": "0"
+        "cursorPosition": "50,154",
+        "scrollLine": "35"
     },
     "folds": "",
-    "lastKnownWriteTime": 1655120469,
+    "lastKnownWriteTime": 1655145208,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1655120469821,
+    "last_content_update": 1655145208189,
     "read_only": false,
     "read_only_alternatives": []
 }
