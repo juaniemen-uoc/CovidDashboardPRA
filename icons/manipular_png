@@ -1,0 +1,8 @@
+mogrify -resize '50' *.png
+
+mogrify strike.png -fill "#1B9479" -colorize 100 strike.png
+mogrify civil-right-movement.png -fill "#D320E0" -colorize 100 civil-right-movement.png
+mogrify explosion.png -fill "#940420" -colorize 100 explosion.png
+mogrify war.png -fill "#6028E0" -colorize 100 war.png
+mogrify strategic-plan.png -fill "#46B4E0" -colorize 100 strategic-plan.png
+mogrify bullying.png -fill "#E0284C" -colorize 100 bullying.png

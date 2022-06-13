@@ -1,0 +1,13 @@
+name: CovidDashboardPRA
+title: CovidDashboardPRA
+username:
+account: juaniemen-uoc
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6479535
+bundleId: 6002552
+url: https://juaniemen-uoc.shinyapps.io/CovidDashboardPRA/
+when: 1655120970.46254
+lastSyncTime: 1655120970.46255
+asMultiple: FALSE
+asStatic: FALSE
